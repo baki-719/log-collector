@@ -1,0 +1,23 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+server:
+  port: 7070
+
+es:
+  host: localhost:9200
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port: 7070
+
+es:
+  host: elasticsearch:9200
