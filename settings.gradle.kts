@@ -1,1 +1,1 @@
-rootProject.name = "logCollector"
+rootProject.name = "log-collector"
