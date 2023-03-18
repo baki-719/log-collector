@@ -1,12 +1,6 @@
 package com.campaignhunter.logcollector.log
 
-import org.springframework.data.annotation.Id
-import org.springframework.data.elasticsearch.annotations.Document
-
-@Document(indexName = "logs")
 data class Log(
-    @Id
-    val id: String?,
     val appName: String,
     val timestamp: String,
     val message: String,
@@ -14,10 +8,14 @@ data class Log(
     val loggerName: String,
     val threadName: String
 ) {
+
+    fun toText(): String {
+        return "$timestamp $threadName $loggerName $level $message"
+    }
+
     companion object {
         fun from(request: LogRequest):Log {
             return Log(
-                id = null,
                 appName = request.appName,
                 timestamp = request.timestamp,
                 message = request.message,
