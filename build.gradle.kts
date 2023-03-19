@@ -54,5 +54,7 @@ jib {
 		jvmFlags = listOf("-Dspring.profiles.active=prod", "-XX:+UseContainerSupport", "-Duser.timezone=Asia/Seoul")
 
 		ports = listOf("7070")
+
+		volumes = listOf("/home/baki/log:/log")
 	}
 }
