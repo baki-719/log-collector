@@ -9,8 +9,36 @@ data class Log(
     val threadName: String
 ) {
 
+    private val maxLoggerNameLength = 40
+
     fun toText(): String {
-        return "$timestamp $threadName $loggerName $level $message"
+        val threadNameFormatted = String.format("%15s", threadName)
+        val shortLoggerName = shortenLoggerName(loggerName)
+        val loggerNameFormatted = shortLoggerName.padEnd(maxLoggerNameLength)
+        return "$timestamp  $level --- [$threadNameFormatted] $loggerNameFormatted: $message"
+    }
+
+    private fun shortenLoggerName(loggerName: String): String {
+        var result = loggerName
+
+        while (result.length >= maxLoggerNameLength) {
+            val blocks = result.split(".").toMutableList()
+
+            for(i in 0 until blocks.size-1) {
+                if(blocks[i].length > 1) {
+                    blocks[i] = blocks[i].first().toString()
+                    break
+                }
+            }
+
+            result = blocks.joinToString(".")
+
+            if(result.length >= maxLoggerNameLength) {
+                result = result.takeLast(maxLoggerNameLength)
+            }
+        }
+
+        return result
     }
 
     companion object {

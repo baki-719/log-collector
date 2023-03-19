@@ -7,8 +7,19 @@ import java.io.FileWriter
 class LogWriter(
     appName: String
 ) {
-    private val logFile: File = File("/log/$appName.log")
     private val sleepTime = 50L
+    private val logDirectory = File("./log")
+    private val logFile = File("${logDirectory.name}/$appName.log")
+
+    init {
+        if(!logDirectory.exists()) {
+            logDirectory.mkdir()
+        }
+
+        if(!logFile.exists()) {
+            logFile.createNewFile()
+        }
+    }
 
     fun write(log: String) {
         var lockAcquired = false
