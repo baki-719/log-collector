@@ -51,10 +51,8 @@ jib {
 	container {
 		creationTime.set("USE_CURRENT_TIMESTAMP")
 
-		jvmFlags = listOf("-Dspring.profiles.active=prod", "-XX:+UseContainerSupport", "-Duser.timezone=Asia/Seoul")
+		jvmFlags = listOf("-Dspring.profiles.active=prod", "-XX:+UseContainerSupport", "-Duser.timezone=Asia/Seoul", "-Xms256m -Xmx1g")
 
 		ports = listOf("7070")
-
-		volumes = listOf("/home/baki/log:/log")
 	}
 }
